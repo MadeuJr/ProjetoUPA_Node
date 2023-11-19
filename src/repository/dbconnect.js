@@ -1,11 +1,18 @@
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize('postgres://ifzgjcdo:S5X65ge-otVIp-v8tWnn7F0XvnmB1Bv0@isabelle.db.elephantsql.com/ifzgjcdo');
+const sequelize = new Sequelize({
+    dialect: 'sqlite',
+    storage: 'database.db',
+});
 
-(async () => {
-    await sequelize.sync();
-    
-})();
+sequelize
+    .sync()
+    .then(() => {
+        console.log('Conexão bem-sucedida.');
+    })
+    .catch((err) => {
+        console.error('Erro na conexão:', err);
+    });
 
 
 module.exports = sequelize;
